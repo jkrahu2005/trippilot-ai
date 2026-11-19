@@ -2,7 +2,7 @@ import { ArrowLeft, Compass } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import TripForm from "../components/planner/TripForm";
+import ChatPlanner from "../components/chat/ChatPlanner";
 
 function PlanTrip() {
   return (
@@ -72,54 +72,48 @@ function PlanTrip() {
       </header>
 
       {/* Main */}
-      <main className="relative z-10 px-6 pb-16 pt-8 lg:px-8 lg:pt-14">
+      <main className="relative z-10 px-4 pb-8 pt-4 lg:px-8 lg:pb-12 lg:pt-8">
         <div className="mx-auto max-w-6xl">
           {/* Intro */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="mx-auto mb-10 max-w-3xl text-center"
+            className="mx-auto mb-9 max-w-3xl text-center"
           >
             <div className="tp-eyebrow mb-4 text-primary">
-              Build your journey
+              Your travel copilot
             </div>
 
-            <h1 className="text-4xl font-semibold tracking-[-0.04em] text-base-content sm:text-5xl lg:text-6xl">
-              Plan something
+            <h1 className="text-3xl font-semibold tracking-[-0.04em] text-base-content sm:text-4xl lg:text-5xl">
+              Tell us the trip.
               <span className="block text-primary">
-                worth remembering.
+                We'll shape the rest.
               </span>
             </h1>
 
-            <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-base-content/60 sm:text-lg">
-              Give TripPilot the essentials. Our travel agents will
-              coordinate the route, itinerary, weather and budget into
-              one coherent trip.
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-base-content/60 sm:text-base">
+              Talk to TripPilot the way you'd talk to a travel
+              agent. It asks the right questions, coordinates the
+              agents, then hands you an editable itinerary you can
+              finalize.
             </p>
           </motion.div>
 
-          {/* Planner */}
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.65,
-              delay: 0.08,
-            }}
-          >
-            <TripForm />
-          </motion.div>
+          {/* Conversational planner */}
+          <div>
+            <ChatPlanner />
+          </div>
 
           {/* Small footer note */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-8 text-center text-xs text-base-content/45"
+            className="mt-4 text-center text-xs text-base-content/45"
           >
-            No account required · No complicated setup · Just tell us
-            where you're going
+            No account required · Natural-language planning ·
+            Edit every detail before you finalize
           </motion.div>
         </div>
       </main>
