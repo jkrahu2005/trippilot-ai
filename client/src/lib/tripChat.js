@@ -739,8 +739,8 @@ function parseOriginFromText(text, draft = {}) {
     if (notDestination) return notDestination.name;
   }
 
-  if (looksLikePlace(text)) return cleanPlace(text);
-
+  // Only consider it an origin if it explicitly matches an origin cue pattern
+  // (Do NOT fall back to raw text, which would copy a destination like "Jaipur" into origin)
   return null;
 }
 
@@ -787,7 +787,9 @@ export function parseFieldValue(field, text, draft = {}) {
     case "origin": {
       const parsed =
         parseOriginFromText(value, draft) ||
-        (looksLikePlace(value) ? cleanPlace(value) : null);
+        (looksLikePlace(value) && value.toLowerCase() !== (draft.destination || "").toLowerCase()
+          ? cleanPlace(value)
+          : null);
       return parsed;
     }
 
