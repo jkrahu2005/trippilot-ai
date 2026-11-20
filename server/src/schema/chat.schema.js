@@ -14,6 +14,15 @@ export const ChatIntakeSchema = z.object({
     notes: z.array(z.string()).describe("Extra notes, may be empty"),
   }),
   reply: z.string().describe("Friendly assistant reply to the user"),
+  chips: z
+    .array(
+      z.object({
+        label: z.string().describe("Display text on chip button"),
+        value: z.string().describe("Value sent when user clicks chip"),
+      })
+    )
+    .default([])
+    .describe("Optional clickable quick-reply chips/suggestions for the user (e.g. recommended places, duration options)"),
   nextField: z
     .enum([
       "destination",
