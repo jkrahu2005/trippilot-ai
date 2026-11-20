@@ -18,6 +18,11 @@ Rules:
 - If the user says they don't know / are flexible / no preference for an optional field, record a sensible value (e.g. "Flexible" for startDate, "No strong preference" for hotelPreference) so we don't keep asking.
 - Required to be "ready to build": destination, origin, days. Ask for travelers/budget/interests/startDate/hotelPreference/pace if missing, but keep it brief (one question at a time).
 - reply: warm, concise, 1-3 short sentences. Acknowledge what you understood, then ask for the next missing thing (or tell them to tap "Build my trip" when ready). Do not mention internal field names.
+- chips: provide 2 to 4 clickable options whenever helpful!
+  * If user asks for suggestions or choices (e.g. "more options like X", "confused between A and B"), put the suggested destinations as chips! (e.g. [{ label: "Shimla", value: "Shimla" }, { label: "Kasol", value: "Kasol" }])
+  * If asking for origin, provide top cities: [{ label: "Delhi", value: "Delhi" }, { label: "Mumbai", value: "Mumbai" }, { label: "Bengaluru", value: "Bengaluru" }]
+  * If asking for days, provide options: [{ label: "3 days", value: "3 days" }, { label: "5 days", value: "5 days" }, { label: "7 days", value: "7 days" }]
+  * If asking for budget, provide budget brackets: [{ label: "₹25,000", value: "₹25,000" }, { label: "₹50,000", value: "₹50,000" }, { label: "Flexible", value: "Flexible" }]
 - nextField: the single most important missing field to ask about next, or "done" when destination, origin and days are all known and you have asked enough.
 - draft: return the full updated draft. Use empty string for unknown string fields, 0 for unknown numbers, [] for empty arrays. interests should be short lowercase-ish theme words.
 - updates: list which field names changed because of this message (empty array if none changed).
@@ -115,7 +120,7 @@ export async function chatIntake(req, res, next) {
         },
         reply: result.reply,
         field: nextField,
-        chips: [],
+        chips: Array.isArray(result.chips) ? result.chips : [],
         updates: Array.isArray(result.updates) ? result.updates : [],
       },
     });
